@@ -1,0 +1,20 @@
+<form [formGroup]="myForm">
+  <label for="firstName">First Name</label>
+  <input type="text" id="firstName" formControlName="firstName" ><br><br>
+
+  <label for="lastName">Last Name</label>
+  <input type="text" id="lastName" formControlName="lastName" ><br><br>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" formControlName="email"><br><br>
+  
+  <!-- Addhghggh more form controls as needed -->
+  <div formArrayName="hobbies">
+    <div *ngFor="let hobbyControl of hobbiesFormArray.controls; let i = index">
+      <input type="text" [formControlName]="i">
+      <button type="button" (click)="removeHobby(i)">Remove</button>
+    </div>
+  </div><br><br>
+  <button type="button" (click)="addHobby()">Add Hobby</button><br><br>
+  <button type="submit" (click)="onSubmit()">Submit</button>
+</form>
