@@ -1,0 +1,55 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container styles */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Label styles */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.clickbtn,
+.submitbtn {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.clickbtn button,
+.submitbtn button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.clickbtn button {
+    background-color: #f44336;
+}
+
+.clickbtn button:hover,
+.submitbtn button:hover {
+    opacity: 0.8;
+}

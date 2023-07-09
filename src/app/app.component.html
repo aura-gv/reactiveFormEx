@@ -1,20 +1,41 @@
 <form [formGroup]="myForm">
   <label for="firstName">First Name</label>
-  <input type="text" id="firstName" formControlName="firstName" ><br><br>
+  <input
+    type="text"
+    id="firstName"
+    formControlName="firstName"
+    placeholder="Ex: Gaurav"
+  />
 
   <label for="lastName">Last Name</label>
-  <input type="text" id="lastName" formControlName="lastName" ><br><br>
+  <input
+    type="text"
+    id="lastName"
+    formControlName="lastName"
+    placeholder="Ex: Khatiwada"
+  />
 
   <label for="email">Email</label>
-  <input type="email" id="email" formControlName="email"><br><br>
-  
-  <!-- Addhghggh more form controls as needed -->
+  <input
+    type="email"
+    id="email"
+    formControlName="email"
+    placeholder="gaurav@mail.com"
+  />
+
   <div formArrayName="hobbies">
     <div *ngFor="let hobbyControl of hobbiesFormArray.controls; let i = index">
-      <input type="text" [formControlName]="i">
+      <label>Hobby</label>
+      <input type="text" [formControlName]="i" placeholder="Ex: Reading" />
       <button type="button" (click)="removeHobby(i)">Remove</button>
     </div>
-  </div><br><br>
-  <button type="button" (click)="addHobby()">Add Hobby</button><br><br>
-  <button type="submit" (click)="onSubmit()">Submit</button>
+  </div>
+  <div class="clickbtn">
+    <button type="button" (click)="addHobby()">Add Hobby</button>
+  </div>
+  <div class="submitbtn">
+    <button type="submit" [disabled]="myForm.invalid" (click)="onSubmit()">
+      Submit
+    </button>
+  </div>
 </form>

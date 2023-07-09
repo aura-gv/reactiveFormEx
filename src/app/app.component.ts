@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +14,6 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class AppComponent {
   myForm!: FormGroup;
-
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = new FormGroup({
@@ -31,6 +36,6 @@ export class AppComponent {
     this.hobbiesFormArray.removeAt(index);
   }
   onSubmit() {
-    console.log(this.myForm.value);
+    alert(this.myForm.value);
   }
 }
