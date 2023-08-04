@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormArray,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -13,29 +7,56 @@ import {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  myForm!: FormGroup;
+  empForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.myForm = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      hobbies: new FormArray([]),
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.empForm = this.fb.group({
+      email: '',
+      employees: this.fb.array([]),
     });
   }
 
-  get hobbiesFormArray() {
-    return this.myForm.get('hobbies') as FormArray;
+  employees(): FormArray {
+    return this.empForm.get('employees') as FormArray;
   }
 
-  addHobby() {
-    this.hobbiesFormArray.push(new FormControl());
+  newEmployee(): FormGroup {
+    return this.fb.group({
+      firstName: '',
+      lastName: '',
+      skills: this.fb.array([]),
+    });
   }
 
-  removeHobby(index: number) {
-    this.hobbiesFormArray.removeAt(index);
+  addEmployee() {
+    this.employees().push(this.newEmployee());
   }
+
+  removeEmployee(empIndex: number) {
+    this.employees().removeAt(empIndex);
+  }
+
+  employeeSkills(empIndex: number): FormArray {
+    return this.employees().at(empIndex).get('skills') as FormArray;
+  }
+
+  newSkill(): FormGroup {
+    return this.fb.group({
+      skill: '',
+    });
+  }
+
+  addEmployeeSkill(empIndex: number) {
+    this.employeeSkills(empIndex).push(this.newSkill());
+  }
+
+  removeEmployeeSkill(empIndex: number, skillIndex: number) {
+    this.employeeSkills(empIndex).removeAt(skillIndex);
+  }
+
   onSubmit() {
-    alert(this.myForm.value);
+    console.log(this.empForm.value);
   }
 }

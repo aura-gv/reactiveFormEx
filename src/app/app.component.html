@@ -1,41 +1,40 @@
-<form [formGroup]="myForm">
-  <label for="firstName">First Name</label>
-  <input
-    type="text"
-    id="firstName"
-    formControlName="firstName"
-    placeholder="Ex: Gaurav"
-  />
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+  <div>
+    Email :
+    <input type="text" formControlName="email" />
+  </div>
+  <div formArrayName="employees">
+    <div *ngFor="let employee of employees().controls; let empIndex = index">
+      <div [formGroupName]="empIndex">
+        First Name :
+        <input type="text" formControlName="firstName" />
+        Last Name:
+        <input type="text" formControlName="lastName" />
 
-  <label for="lastName">Last Name</label>
-  <input
-    type="text"
-    id="lastName"
-    formControlName="lastName"
-    placeholder="Ex: Khatiwada"
-  />
+        <button (click)="removeEmployee(empIndex)">Remove</button>
 
-  <label for="email">Email</label>
-  <input
-    type="email"
-    id="email"
-    formControlName="email"
-    placeholder="gaurav@mail.com"
-  />
+        <div formArrayName="skills">
+          <div
+            *ngFor="
+              let skill of employeeSkills(empIndex).controls;
+              let skillIndex = index
+            "
+          >
+            <div [formGroupName]="skillIndex">
+              Skill :
+              <input type="text" formControlName="skill" />
 
-  <div formArrayName="hobbies">
-    <div *ngFor="let hobbyControl of hobbiesFormArray.controls; let i = index">
-      <label>Hobby</label>
-      <input type="text" [formControlName]="i" placeholder="Ex: Reading" />
-      <button type="button" (click)="removeHobby(i)">Remove</button>
+              <button (click)="removeEmployeeSkill(empIndex, skillIndex)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addEmployeeSkill(empIndex)">
+          Add Skill
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="clickbtn">
-    <button type="button" (click)="addHobby()">Add Hobby</button>
-  </div>
-  <div class="submitbtn">
-    <button type="submit" [disabled]="myForm.invalid" (click)="onSubmit()">
-      Submit
-    </button>
+    <button type="button" (click)="addEmployee()">Add Employee</button>
   </div>
 </form>
